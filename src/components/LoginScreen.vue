@@ -13,7 +13,7 @@
       <div class="login-divider"></div>
       <div class="login-heading">🔒 AUTHORIZED ACCESS ONLY</div>
       <div v-if="error" class="login-error">
-        <span>⚠️</span><span>Invalid username or password. Please try again.</span>
+        <span>⚠️</span><span>{{ errorMsg || 'Invalid username or password.' }}</span>
       </div>
       <div class="login-form-group">
         <label>Username</label>
@@ -48,6 +48,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { supabase } from '../lib/supabase.js'
 const emit = defineEmits(['login'])
 
 const username = ref('')
@@ -55,6 +56,7 @@ const password = ref('')
 const remember = ref(false)
 const showPw   = ref(false)
 const error    = ref(false)
+const errorMsg = ref('')
 const loading  = ref(false)
 
 onMounted(() => {
@@ -68,20 +70,38 @@ onMounted(() => {
   } catch {}
 })
 
-function doLogin() {
-  if (username.value === 'Admin' && password.value === 'trafficbcps1') {
+async function doLogin() {
+  if (!username.value || !password.value) {
+    errorMsg.value = 'Please enter both username and password.'
+    error.value = true
+    setTimeout(() => error.value = false, 3500)
+    return
+  }
+  
+  loading.value = true
+  error.value = false
+  
+  // Query custom admin_users table in Supabase
+  const { data, error: err } = await supabase
+    .from('admin_users')
+    .select('*')
+    .eq('username', username.value)
+    .eq('password', password.value)
+    .single()
+
+  if (err || !data) {
+    loading.value = false
+    errorMsg.value = 'Invalid username or password. Please try again.'
+    error.value = true
+    password.value = ''
+    setTimeout(() => error.value = false, 3500)
+  } else {
     if (remember.value) {
       try { localStorage.setItem('bcpo_remember', JSON.stringify({ user: username.value, pass: password.value })) } catch {}
     } else {
       try { localStorage.removeItem('bcpo_remember') } catch {}
     }
-    loading.value = true
-    setTimeout(() => emit('login'), 600)
-  } else {
-    try { localStorage.removeItem('bcpo_remember') } catch {}
-    error.value = true
-    password.value = ''
-    setTimeout(() => error.value = false, 3500)
+    emit('login')
   }
 }
 </script>
