@@ -29,6 +29,7 @@ export function toDbRecord(r) {
     officer_2: r.officer2 || '',
     remarks: r.remarks || '',
     status: r.status || 'Impounded',
+    admin_id: sessionStorage.getItem('bcpo_admin_id') || null
   }
 }
 

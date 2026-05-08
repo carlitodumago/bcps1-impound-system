@@ -101,7 +101,7 @@ async function doLogin() {
     } else {
       try { localStorage.removeItem('bcpo_remember') } catch {}
     }
-    emit('login')
+    emit('login', data)
   }
 }
 </script>

@@ -50,7 +50,7 @@ function showToast(type, title, message, duration = 3500) {
 }
 function hideToast() { toast.value.show = false; if (_toastTimer) clearTimeout(_toastTimer) }
 
-// ── Violation Types (persisted, shared across all components) ──
+// ── Violation Types (Cloud Synced) ──
 const DEFAULT_VIOLATIONS = ['No Helmet','No License','Expired Registration','No Registration','Reckless Driving','Illegal Parking','DUI/DWI','Overloading','Obstruction of Traffic','Illegal Modification','Hit and Run','Other Traffic Violation']
 function loadViolationTypes() {
   try {
@@ -60,7 +60,14 @@ function loadViolationTypes() {
   return [...DEFAULT_VIOLATIONS]
 }
 const violationTypes = ref(loadViolationTypes())
-watch(violationTypes, (v) => { try { localStorage.setItem('bcpo_violation_types', JSON.stringify(v)) } catch { } }, { deep: true })
+
+watch(violationTypes, async (v) => {
+  try {
+    localStorage.setItem('bcpo_violation_types', JSON.stringify(v))
+    // Push settings change to Supabase
+    await supabase.from('system_settings').upsert({ key: 'violation_types', value: v })
+  } catch { }
+}, { deep: true })
 
 // ── Persist to localStorage (cache layer) ──
 function persistRecords() {
@@ -92,6 +99,16 @@ setInterval(updateTime, 1000)
 
 async function fetchFromSupabase() {
   try {
+    // Fetch Settings First
+    const { data: settingsData } = await supabase.from('system_settings').select('*')
+    if (settingsData) {
+      const vTypes = settingsData.find(s => s.key === 'violation_types')
+      if (vTypes && Array.isArray(vTypes.value)) {
+        violationTypes.value = vTypes.value
+      }
+    }
+
+    // Fetch Records
     const { data, error } = await supabase
       .from('impound_records')
       .select('*')
@@ -207,8 +224,11 @@ export function fmtTime(t) {
 // ═══════════════════════════════════════════
 
 export function useImpoundStore() {
-  function login() {
+  function login(adminData) {
     isLoggedIn.value = true
+    if (adminData && adminData.id) {
+      sessionStorage.setItem('bcpo_admin_id', adminData.id)
+    }
     sessionStorage.setItem('bcpo_logged_in', 'true')
   }
 
@@ -218,6 +238,7 @@ export function useImpoundStore() {
     isLoggedIn.value = false
     page.value = 'dashboard'
     sessionStorage.removeItem('bcpo_logged_in')
+    sessionStorage.removeItem('bcpo_admin_id')
     sessionStorage.removeItem('bcpo_page')
   }
 

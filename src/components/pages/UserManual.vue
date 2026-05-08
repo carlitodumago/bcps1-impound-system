@@ -39,7 +39,7 @@
             <strong>Logging In</strong>
             <ol>
               <li>Open the application in your web browser.</li>
-              <li>Enter your <strong>Email Address</strong> and <strong>Password</strong> in the login form.</li>
+              <li>Enter your <strong>Username</strong> and <strong>Password</strong> in the login form.</li>
               <li>Optionally check <strong>"Remember username &amp; password"</strong> to auto-fill next time.</li>
               <li>Click <strong>🚔 LOGIN TO SYSTEM</strong> to access the dashboard.</li>
             </ol>
@@ -74,9 +74,9 @@
             <ul>
               <li><strong>View Receipt</strong> — Opens the formatted official impound receipt.</li>
               <li><strong>View Details</strong> — Shows full record information including vehicle photo.</li>
-              <li><strong>Edit</strong> — Modify record details.</li>
-              <li><strong>Release / Impound</strong> — Change vehicle status.</li>
-              <li><strong>Delete</strong> — Permanently remove the record.</li>
+              <li><strong>Edit</strong> — Modify record details (requires authorization password).</li>
+              <li><strong>Release / Impound</strong> — Change vehicle status (requires authorization password).</li>
+              <li><strong>Delete</strong> — Permanently remove the record (requires authorization password).</li>
             </ul>
           </div>
         </div>
@@ -154,10 +154,10 @@
             <ul>
               <li><strong>View Details</strong> — Opens a modal showing all record information, including vehicle photo (if uploaded), organized by section.</li>
               <li><strong>View Receipt</strong> — Opens the official impounding receipt for viewing/printing.</li>
-              <li><strong>Edit</strong> — Opens the edit form to modify record details.</li>
-              <li><strong>Release</strong> — Mark an impounded vehicle as released.</li>
-              <li><strong>Impound</strong> — Re-impound a previously released vehicle.</li>
-              <li><strong>Delete</strong> — Permanently remove the record.</li>
+              <li><strong>Edit</strong> — Opens the edit form to modify record details. Requires the <strong>authorization password</strong> to save changes.</li>
+              <li><strong>Release</strong> — Mark an impounded vehicle as released. Requires password confirmation.</li>
+              <li><strong>Impound</strong> — Re-impound a previously released vehicle. Requires password confirmation.</li>
+              <li><strong>Delete</strong> — Permanently remove the record. Requires password confirmation.</li>
             </ul>
           </div>
         </div>
@@ -197,6 +197,7 @@
               <li>Click the <strong>Edit</strong> button on any record (from Dashboard, Impound Records, or View Receipt).</li>
               <li>The Edit modal will open with all current record data pre-filled.</li>
               <li>Modify any fields as needed — vehicle info, driver/owner details, violations, officers, remarks, or vehicle photo.</li>
+              <li>Enter the <strong>Authorization Password</strong> at the bottom of the form.</li>
               <li>Click <strong>Save Changes</strong> to confirm the update.</li>
             </ol>
           </div>
@@ -205,6 +206,7 @@
             <ol>
               <li>Click the <strong>Delete</strong> button on any record.</li>
               <li>A confirmation dialog will appear showing the vehicle's plate number.</li>
+              <li>Enter the <strong>Authorization Password</strong>.</li>
               <li>Click <strong>Delete Record</strong> to permanently remove the record.</li>
             </ol>
             <div class="manual-warning">
@@ -216,11 +218,11 @@
             <ol>
               <li>Click the <strong>Release</strong> button on an impounded vehicle (or <strong>Impound</strong> on a released vehicle).</li>
               <li>A confirmation dialog will appear.</li>
-              <li>Click the confirmation button to proceed.</li>
+              <li>Enter the <strong>Authorization Password</strong> and confirm.</li>
             </ol>
           </div>
           <div class="manual-note" style="background:rgba(201,168,76,0.08);border-color:rgba(201,168,76,0.3)">
-            <span>🔐</span> Because the application is protected by a secure Email/Password login system, authorized admins can immediately edit, delete, release, and re-impound vehicles without needing a secondary password.
+            <span>🔐</span> The authorization password <strong style="color:var(--gold2);font-size:15px;letter-spacing:1px">bcps1</strong> is required for all <strong>Edit</strong>, <strong>Delete</strong>, <strong>Release</strong>, and <strong>Re-Impound</strong> operations. This ensures that only authorized personnel can modify or remove records. Keep this password confidential.
           </div>
         </div>
       </div>
@@ -307,7 +309,11 @@
             <strong>Common Issues</strong>
             <div class="faq-item">
               <div class="faq-q">Q: I can't log in to the system.</div>
-              <div class="faq-a">A: Ensure you are entering the correct email address and password. Contact your system administrator if you need your credentials reset.</div>
+              <div class="faq-a">A: Ensure you are entering the correct username and password. Credentials are case-sensitive. Contact your system administrator if you need your credentials reset.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">Q: The authorization password is not working for Edit/Delete.</div>
+              <div class="faq-a">A: The authorization password is <strong>bcps1</strong>. It is case-sensitive — make sure to type it exactly as shown in lowercase.</div>
             </div>
             <div class="faq-item">
               <div class="faq-q">Q: My records disappeared after clearing browser data.</div>
