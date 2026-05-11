@@ -118,7 +118,7 @@
       </div>
       <div class="receipt-body" style="text-indent:60px; font-size:9pt; line-height:1.6; margin-top:15px; margin-bottom:10px; text-align:justify;">Subject MV/MC was apprehended by BCPO Station 1 personnel for violation/s as stated above on <u>&nbsp;{{ detailRecord.date ? fmtDate(detailRecord.date) : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' }}&nbsp;</u> at about <u>&nbsp;{{ detailRecord.time ? fmtTime(detailRecord.time) : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' }}&nbsp;</u> along the vicinity of <u>&nbsp;{{ detailRecord.location || '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' }}&nbsp;</u> and same was brought for safekeeping subject for the investigation/verification and proper disposition.</div>
       <div class="receipt-note" style="margin-bottom:10px; font-size:9pt;">Note: Subject MV/MC shall only be released upon presentation of its pertinent original documents and agreement.</div>
-      <div class="receipt-sigs" style="position:relative; min-height:150px;">
+      <div class="receipt-sigs" style="position:relative; min-height:180px;">
         <div class="apprehending" style="position:absolute; right:0; top:0; width:350px;">
           <div style="font-size:10pt; margin-bottom:20px; text-align:left;">Apprehending Officer:</div>
           <div style="display:flex;flex-direction:column;gap:25px;align-items:flex-end;">
@@ -132,7 +132,7 @@
             </div>
           </div>
         </div>
-        <div class="conformed" style="position:absolute; left:0; top:150px; width:300px;">
+        <div class="conformed" style="position:absolute; left:0; top:110px; width:300px;">
           <div style="font-size:9pt;margin-bottom:20px">Conformed:</div>
           <div class="sig-line-block" style="align-items:center; margin-top:0; padding-left:40px;">
             <div style="width:220px;border-top:1px solid #000;padding-top:4px;font-size:9pt;text-align:center;">Owner/Driver/Possessor</div>
