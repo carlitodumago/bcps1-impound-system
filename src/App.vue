@@ -7,12 +7,12 @@
       <NavBar @logout="showLogoutDialog = true" />
       <MobileNav @logout="showLogoutDialog = true" />
       <main>
-        <Dashboard    v-if="page === 'dashboard'" />
-        <ImpoundingReceipt v-if="page === 'receipt'" :print-area="recordPrintArea" />
-        <ImpoundRecords v-if="page === 'records'" />
-        <Reports      v-if="page === 'reports'" />
-        <UserManual   v-if="page === 'manual'" />
-        <BackupRestore v-if="page === 'backup'" />
+        <Dashboard    v-show="page === 'dashboard'" />
+        <ImpoundingReceipt v-show="page === 'receipt'" :print-area="recordPrintArea" />
+        <ImpoundRecords v-show="page === 'records'" />
+        <Reports      v-show="page === 'reports'" />
+        <UserManual   v-show="page === 'manual'" />
+        <BackupRestore v-show="page === 'backup'" />
       </main>
       <ViewModal />
       <LogoutDialog @confirm="confirmLogout" />

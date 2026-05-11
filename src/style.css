@@ -1047,6 +1047,16 @@ textarea {
   body[data-print-mode="record-receipt"] #record-receipt-print-area {
     display: block !important
   }
+
+  /* Details modal receipt print mode */
+  body[data-print-mode="details-receipt"] #app {
+    display: none !important
+  }
+
+  body[data-print-mode="details-receipt"] .details-print-area {
+    display: block !important;
+    background: white;
+  }
 }
 
 /* GIF ANIMATION EFFECT */
