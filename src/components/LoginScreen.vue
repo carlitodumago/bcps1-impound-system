@@ -4,7 +4,7 @@
     <div class="login-card">
       <div class="login-stars"></div>
       <div class="login-logo">
-        <div class="login-logo-badge" style="background: transparent;">
+        <div class="login-logo-badge" style="background: transparent; box-shadow: none;">
           <img src="/logo-pnp-icon.png" style="width: 100%; height: 100%; object-fit: contain;" />
         </div>
         <div class="login-title">
