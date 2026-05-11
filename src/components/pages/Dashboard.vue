@@ -20,11 +20,12 @@
         <div class="chart-wrap"><canvas ref="monthlyChart"></canvas></div>
       </div>
       <div class="card">
-        <div class="card-header"><div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Vehicle Types</div></div>
+        <div class="card-header"><div class="card-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Impounded and Released</div></div>
         <div style="position:relative;height:300px"><canvas ref="typeChart"></canvas></div>
-        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;font-size:12px">
-          <span v-for="item in typeStats" :key="item.label">
-            <span style="display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px" :style="{background: item.color}"></span>{{ item.label }} {{ item.pct }}%
+        <div style="display:flex;justify-content:center;gap:20px;margin-top:16px;font-size:13px;color:#c8d0dc">
+          <span v-for="item in typeStats" :key="item.label" style="display:flex;align-items:center;gap:6px">
+            <span style="display:inline-block;width:11px;height:11px;border-radius:50%;flex-shrink:0" :style="{background: item.color}"></span>
+            {{ item.label }} {{ item.count }}
           </span>
         </div>
       </div>
@@ -101,23 +102,14 @@ const monthlyData = computed(() => {
   return { labels, impCounts, relCounts }
 })
 
-// ── Compute vehicle type breakdown from REAL records ──
-const typeColors = { 'Motorcycle': '#c9a84c', 'Car': '#27ae60', 'SUV': '#2196f3', 'Pickup Truck': '#e74c3c', 'Truck': '#9b59b6', 'Van': '#f39c12', 'Jeepney': '#1abc9c', 'Tricycle': '#3498db', 'Other': '#95a5a6' }
+// ── Compute Impounded vs Released breakdown ──
 const typeStats = computed(() => {
-  const counts = {}
-  records.value.forEach(r => {
-    const t = r.type || 'Other'
-    counts[t] = (counts[t] || 0) + 1
-  })
-  const total = records.value.length || 1
-  return Object.entries(counts)
-    .sort((a, b) => b[1] - a[1])
-    .map(([label, count]) => ({
-      label,
-      count,
-      pct: Math.round(count / total * 100),
-      color: typeColors[label] || '#95a5a6'
-    }))
+  const impounded = records.value.filter(r => r.status === 'Impounded').length
+  const released  = records.value.filter(r => r.status === 'Released').length
+  return [
+    { label: 'Impounded', count: impounded, color: '#e74c3c' },
+    { label: 'Released',  count: released,  color: '#27ae60' },
+  ]
 })
 
 function buildCharts() {
@@ -135,19 +127,26 @@ function buildCharts() {
       ]},
       options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
         scales: { x: { ticks: { color: '#8892a4', font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
-                  y: { ticks: { color: '#8892a4', font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.06)' }, beginAtZero: true } } }
+                  y: { ticks: { color: '#8892a4', font: { size: 11 }, precision: 0 }, grid: { color: 'rgba(255,255,255,0.06)' }, beginAtZero: true, suggestedMax: 5 } } }
     })
   }
 
   if (typeChart.value) {
     const ts = typeStats.value
-    if (ts.length > 0) {
-      chartInstances.types = new Chart(typeChart.value, {
-        type: 'doughnut',
-        data: { labels: ts.map(t => t.label), datasets: [{ data: ts.map(t => t.count), backgroundColor: ts.map(t => t.color), borderColor: 'rgba(0,0,0,0)', hoverOffset: 8 }] },
-        options: { responsive: true, maintainAspectRatio: false, cutout: '68%', plugins: { legend: { display: false } } }
-      })
-    }
+    const hasData = ts.some(t => t.count > 0)
+    chartInstances.types = new Chart(typeChart.value, {
+      type: 'doughnut',
+      data: {
+        labels: ts.map(t => t.label),
+        datasets: [{
+          data: hasData ? ts.map(t => t.count) : [1, 1],
+          backgroundColor: hasData ? ts.map(t => t.color) : ['rgba(255,255,255,0.08)', 'rgba(255,255,255,0.08)'],
+          borderColor: 'rgba(0,0,0,0)',
+          hoverOffset: 8
+        }]
+      },
+      options: { responsive: true, maintainAspectRatio: false, cutout: '55%', plugins: { legend: { display: false }, tooltip: { enabled: hasData } } }
+    })
   }
 }
 

@@ -160,7 +160,7 @@ function buildOverviewCharts() {
       ]},
       options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
         scales: { x: { ticks: { color: '#8892a4', font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
-                  y: { ticks: { color: '#8892a4', font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.06)' }, beginAtZero: true } } }
+                  y: { ticks: { color: '#8892a4', font: { size: 11 }, precision: 0 }, grid: { color: 'rgba(255,255,255,0.06)' }, beginAtZero: true, suggestedMax: 5 } } }
     })
   }
   if (reportStatusRef.value) {
@@ -187,7 +187,7 @@ function buildViolationChart() {
     type: 'bar',
     data: { labels: stats.map(v=>v.name), datasets: [{ label: 'Cases', data: stats.map(v=>v.count), backgroundColor: stats.map((_,i)=>palette[i%palette.length]), borderWidth: 1, borderRadius: 5 }] },
     options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
-      scales: { x: { ticks: { color: '#8892a4', font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.06)' }, beginAtZero: true },
+      scales: { x: { ticks: { color: '#8892a4', font: { size: 11 }, precision: 0 }, grid: { color: 'rgba(255,255,255,0.06)' }, beginAtZero: true, suggestedMax: 5 },
                 y: { ticks: { color: '#ddd', font: { size: 12 } }, grid: { display: false } } } }
   })
 }

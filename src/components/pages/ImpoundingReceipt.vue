@@ -132,7 +132,7 @@
         <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         Preview Receipt
       </button>
-      <button class="btn btn-success" v-if="receiptSaved" @click="() => window.print()">
+      <button class="btn btn-success" v-if="receiptSaved" @click="doPrint">
         <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
         Print Receipt
       </button>
@@ -147,63 +147,64 @@
     <div v-if="showReceipt" class="card" style="padding:0;overflow:hidden">
       <div class="no-print" style="padding:14px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border2)">
         <div class="card-title">Receipt Preview</div>
-        <button class="btn btn-success btn-sm" @click="() => window.print()">🖨️ Print</button>
+        <button class="btn btn-success btn-sm" @click="doPrint">🖨️ Print</button>
       </div>
-      <div id="receipt-print-area" style="padding:20px;background:#f8f8f8">
-        <div class="receipt-preview">
-          <div class="receipt-header">
-            <div class="logos">
-              <div class="logo-circle" style="font-size:7px;font-weight:800;line-height:1.3">NAPOLCOM<br>PNP</div>
-              <div class="header-text">
-                <h4>Republic of the Philippines</h4>
-                <h4>NATIONAL POLICE COMMISSION</h4>
-                <h4>PHILIPPINE NATIONAL POLICE</h4>
-                <h3>BUTUAN CITY POLICE OFFICE</h3>
-                <h2>BUTUAN CITY POLICE STATION 1</h2>
-                <h5>Butuan City</h5>
-              </div>
-              <div class="logo-circle" style="font-size:7px;font-weight:800;line-height:1.3">BCPO<br>STATION 1</div>
+      <div id="receipt-print-area" style="padding:20px;background:#f8f8f8;">
+        <div class="receipt-preview" style="padding: 0 120px;">
+          <div class="receipt-header" style="display:flex; justify-content:center; align-items:center; gap:0px; margin-bottom:10px; text-align:center;">
+            <div style="margin-bottom:10px; margin-right:-20px;">
+              <img src="/logo-pnp.png" style="width:80px; height:auto;" alt="PNP Logo" />
+            </div>
+            <div class="header-text" style="text-align:center; margin-top:20px;">
+              <div style="font-size:12pt; margin-bottom:2px;">Republic of the Philippines</div>
+              <div style="font-size:12pt; margin-bottom:2px;">NATIONAL POLICE COMMISSION</div>
+              <div style="font-size:12pt; margin-bottom:2px;">PHILIPPINE NATIONAL POLICE</div>
+              <div style="font-size:12pt; margin-bottom:2px;">BUTUAN CITY POLICE OFFICE</div>
+              <div style="font-size:12pt; font-weight:bold; margin-bottom:2px;">BUTUAN CITY POLICE STATION 1</div>
+              <div style="font-size:12pt;">Butuan City</div>
+            </div>
+            <div style="margin-bottom:10px; margin-left:-20px;">
+              <img src="/logo-bcpo.png" style="width:100px; height:auto;" alt="BCPO Logo" />
             </div>
           </div>
-          <div class="receipt-date">Date: <span>{{ form.date ? fmtDate(form.date) : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' }}</span></div>
-          <div class="receipt-title">IMPOUNDING RECEIPT</div>
-          <div class="field-row"><span class="field-label">Type of Vehicle</span><span class="field-colon">:</span><span class="field-value">{{ form.type }}</span></div>
-          <div class="field-row"><span class="field-label">Plate no.</span><span class="field-colon">:</span><span class="field-value">{{ form.plate }}</span></div>
-          <div class="field-row"><span class="field-label">Color</span><span class="field-colon">:</span><span class="field-value">{{ form.color }}</span></div>
-          <div class="field-row"><span class="field-label">Driver's Name</span><span class="field-colon">:</span><span class="field-value">{{ form.driver }}</span></div>
-          <div class="field-row"><span class="field-label">Address</span><span class="field-colon">:</span><span class="field-value">{{ form.driverAddress }}</span></div>
-          <div class="field-row"><span class="field-label">Registered Owner</span><span class="field-colon">:</span><span class="field-value">{{ form.owner }}</span></div>
-          <div class="field-row"><span class="field-label">Address</span><span class="field-colon">:</span><span class="field-value">{{ form.ownerAddress }}</span></div>
-          <div class="violations-section">
-            <strong>VIOLATIONS:</strong>
-            <div class="vio-row"><span class="vio-num">1.</span><span class="vio-line">{{ form.vio1 }}</span></div>
-            <div class="vio-row"><span class="vio-num">2.</span><span class="vio-line">{{ form.vio2 }}</span></div>
-            <div v-for="(ev, idx) in form.extraVios.filter(x => x)" :key="idx" class="vio-row">
-              <span class="vio-num">{{ idx + 3 }}.</span><span class="vio-line">{{ ev }}</span>
+          <div class="receipt-date" style="text-align:left;margin-top:5px;margin-bottom:0px;font-size:8pt;">Date: <span style="display:inline-block;min-width:120px;border-bottom:1px solid #000;">{{ form.date ? fmtDate(form.date) : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' }}</span></div>
+          <div class="receipt-title" style="font-family:'Book Antiqua', Palatino, serif; font-size:10pt; letter-spacing:3px; font-weight:bold; text-decoration:underline; text-align:center; margin-bottom:15px; margin-right:15px;">IMPOUNDING RECEIPT</div>
+          <div class="field-row" style="margin-bottom:10px; font-size:9pt; font-weight:normal;"><span class="field-label" style="width:130px; display:inline-block; font-weight:normal;">Type of Vehicle:</span><div class="field-value" style="display:inline-block; width:150px; border-bottom:1px solid #000; min-height:18px; font-weight:normal;">{{ form.type }}</div></div>
+          <div class="field-row" style="margin-bottom:10px; font-size:9pt; font-weight:normal;"><span class="field-label" style="width:130px; display:inline-block; font-weight:normal;">Plate no.:</span><div class="field-value" style="display:inline-block; width:150px; border-bottom:1px solid #000; min-height:18px; font-weight:normal;">{{ form.plate }}</div></div>
+          <div class="field-row" style="margin-bottom:10px; font-size:9pt; font-weight:normal;"><span class="field-label" style="width:130px; display:inline-block; font-weight:normal;">Color:</span><div class="field-value" style="display:inline-block; width:150px; border-bottom:1px solid #000; min-height:18px; font-weight:normal;">{{ form.color }}</div></div>
+          <div class="field-row" style="margin-bottom:10px; font-size:9pt; font-weight:normal;"><span class="field-label" style="width:130px; display:inline-block; font-weight:normal;">Driver's Name:</span><div class="field-value" style="display:inline-block; width:150px; border-bottom:1px solid #000; min-height:18px; font-weight:normal;">{{ form.driver }}</div></div>
+          <div class="field-row" style="margin-bottom:10px; font-size:9pt; font-weight:normal;"><span class="field-label" style="width:130px; display:inline-block; font-weight:normal;">Address:</span><div class="field-value" style="display:inline-block; width:150px; border-bottom:1px solid #000; min-height:18px; font-weight:normal;">{{ form.driverAddress }}</div></div>
+          <div class="field-row" style="margin-bottom:10px; font-size:9pt; font-weight:normal;"><span class="field-label" style="width:130px; display:inline-block; font-weight:normal;">Registered Owner:</span><div class="field-value" style="display:inline-block; width:150px; border-bottom:1px solid #000; min-height:18px; font-weight:normal;">{{ form.owner }}</div></div>
+          <div class="field-row" style="margin-bottom:10px; font-size:9pt; font-weight:normal;"><span class="field-label" style="width:130px; display:inline-block; font-weight:normal;">Address:</span><div class="field-value" style="display:inline-block; width:150px; border-bottom:1px solid #000; min-height:18px; font-weight:normal;">{{ form.ownerAddress }}</div></div>
+          <div class="violations-section" style="margin-top:20px; font-size:9pt; font-weight:normal;">
+            <strong style="font-size:9pt; font-weight:bold;">VIOLATIONS:</strong>
+            <div class="vio-row" style="margin-top:10px; display:flex; font-size:8pt; font-weight:normal; padding-left:95px;"><span class="vio-num" style="width:30px; font-weight:normal;">1.</span><span class="vio-line" style="flex:1; border-bottom:1px solid #000; min-height:18px; font-weight:normal;">{{ form.vio1 }}</span></div>
+            <div class="vio-row" style="margin-top:10px; display:flex; font-size:8pt; font-weight:normal; padding-left:95px;"><span class="vio-num" style="width:30px; font-weight:normal;">2.</span><span class="vio-line" style="flex:1; border-bottom:1px solid #000; min-height:18px; font-weight:normal;">{{ form.vio2 }}</span></div>
+            <div v-for="(ev, idx) in form.extraVios.filter(x => x)" :key="idx" class="vio-row" style="margin-top:10px; display:flex; font-size:8pt; font-weight:normal; padding-left:95px;">
+              <span class="vio-num" style="width:30px; font-weight:normal;">{{ idx + 3 }}.</span><span class="vio-line" style="flex:1; border-bottom:1px solid #000; min-height:18px; font-weight:normal;">{{ ev }}</span>
             </div>
           </div>
-          <div class="receipt-body">Subject MV/MC was apprehended by BCPO Station 1 personnel for violation/s as stated above on <u>&nbsp;{{ fmtDate(form.date) }}&nbsp;</u> at about <u>&nbsp;{{ fmtTime(form.time) }}&nbsp;</u> along the vicinity of <u>&nbsp;{{ form.location }}&nbsp;</u> and same was brought for safekeeping subject for the investigation/verification and proper disposition.</div>
-          <div class="receipt-note">Note: Subject MV/MC shall only be released upon presentation of its pertinent original documents and agreement.</div>
-          <div class="receipt-sigs">
-            <div class="sig-title">Apprehending Officer/s:</div>
-            <div class="sig-group">
-              <div class="conformed">
-                <div style="font-size:12.5px;margin-bottom:4px">Conformed:</div>
-                <div class="sig-line-block" style="align-items:flex-start">
-                  <div style="width:200px;border-top:1px solid #000;padding-top:4px;font-size:12px;text-align:center;margin-top:40px">Owner/Driver/Possessor</div>
+          <div class="receipt-body" style="text-indent:60px; font-size:9pt; line-height:1.6; margin-top:15px; margin-bottom:10px; text-align:justify;">Subject MV/MC was apprehended by BCPO Station 1 personnel for violation/s as stated above on <u>&nbsp;{{ form.date ? fmtDate(form.date) : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' }}&nbsp;</u> at about <u>&nbsp;{{ form.time ? fmtTime(form.time) : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' }}&nbsp;</u> along the vicinity of <u>&nbsp;{{ form.location || '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' }}&nbsp;</u> and same was brought for safekeeping subject for the investigation/verification and proper disposition.</div>
+          <div class="receipt-note" style="margin-bottom:10px; font-size:9pt;">Note: Subject MV/MC shall only be released upon presentation of its pertinent original documents and agreement.</div>
+          <div class="receipt-sigs" style="position:relative; min-height:150px;">
+            <div class="apprehending" style="position:absolute; right:0; top:0; width:350px;">
+              <div style="font-size:10pt; margin-bottom:20px; text-align:left; ">Apprehending Officer:</div>
+              <div style="display:flex;flex-direction:column;gap:25px;align-items:flex-end;">
+                <div class="sig-line-block" style="margin-top:0;align-items:center;">
+                  <div style="font-weight:bold;font-size:9pt;text-align:center;margin-bottom:2px">{{ form.officer }}</div>
+                  <div style="width:260px;border-top:1px solid #000;"></div>
+                </div>
+                <div class="sig-line-block" style="margin-top:0;align-items:center;">
+                  <div style="font-weight:bold;font-size:9pt;text-align:center;margin-bottom:2px">{{ form.officer2 }}</div>
+                  <div style="width:260px;border-top:1px solid #000;"></div>
                 </div>
               </div>
-              <div style="display:flex;gap:20px;flex-wrap:wrap">
-                <div class="sig-line-block">
-                  <div style="font-weight:bold;font-size:13px;text-align:center;margin-top:40px;margin-bottom:4px">{{ form.officer }}</div>
-                  <div style="border-top:1px solid #000;width:100%"></div>
-                  <div style="font-size:11px;text-align:center;color:#888;margin-top:3px">Apprehending Officer</div>
-                </div>
-                <div class="sig-line-block">
-                  <div style="font-weight:bold;font-size:13px;text-align:center;margin-top:40px;margin-bottom:4px">{{ form.officer2 }}</div>
-                  <div style="border-top:1px solid #000;width:100%"></div>
-                  <div style="font-size:11px;text-align:center;color:#888;margin-top:3px">Apprehending Officer</div>
-                </div>
+            </div>
+
+            <div class="conformed" style="position:absolute; left:0; top:80px; width:300px;">
+              <div style="font-size:9pt;margin-bottom:20px">Conformed:</div>
+              <div class="sig-line-block" style="align-items:center; margin-top:0; padding-left:40px;">
+                <div style="width:220px;border-top:1px solid #000;padding-top:4px;font-size:9pt;text-align:center;">Owner/Driver/Possessor</div>
               </div>
             </div>
           </div>
@@ -222,6 +223,10 @@ import DateInput from '../DateInput.vue'
 
 const { page, saveRecord, violationTypes } = useImpoundStore()
 const showManageVio = ref(false)
+
+function doPrint() {
+  window.print()
+}
 
 const blankForm = () => ({ type:'',plate:'',color:'',engineNo:'',chassisNo:'',date:'',time:'',location:'',photo:'',driver:'',driverAddress:'',owner:'',ownerAddress:'',vio1:'',vio2:'',extraVios:[],officer:'',officer2:'',remarks:'' })
 
@@ -281,3 +286,22 @@ function resetForm() {
 
 
 </script>
+
+<style>
+.receipt-preview .field-value {
+  flex: none !important;
+  width: 300px !important;
+}
+.receipt-preview .vio-line {
+  flex: none !important;
+  width: 300px !important;
+}
+@media print {
+  @page {
+    margin: 10mm 0;
+  }
+  .receipt-preview {
+    padding: 0 120px !important;
+  }
+}
+</style>

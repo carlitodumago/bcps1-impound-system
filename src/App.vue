@@ -20,7 +20,6 @@
       <EditModal />
       <EditConfirmDialog />
       <DeleteDialog />
-      <RecordPrintArea ref="recordPrintArea" />
       <DetailsModal />
       <ToastNotification />
       <div class="patrol-gif pulse" style="width:60px;height:60px;display:flex;align-items:center;justify-content:center;font-size:32px">🚔</div>
@@ -46,20 +45,11 @@ import ReleaseDialog   from './components/ReleaseDialog.vue'
 import EditModal       from './components/EditModal.vue'
 import EditConfirmDialog from './components/EditConfirmDialog.vue'
 import DeleteDialog    from './components/DeleteDialog.vue'
-import RecordPrintArea from './components/RecordPrintArea.vue'
 import DetailsModal    from './components/DetailsModal.vue'
 import ToastNotification from './components/ToastNotification.vue'
 
 const store = useImpoundStore()
 const { isLoggedIn, page, showLogoutDialog, login, confirmLogout } = store
-
-const recordPrintArea = ref(null)
-
-function printRecordReceipt(r) {
-  recordPrintArea.value?.fillAndPrint(r)
-}
-
-provide('printRecordReceipt', printRecordReceipt)
 </script>
 
 <style>

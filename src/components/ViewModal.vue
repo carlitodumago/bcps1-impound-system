@@ -15,55 +15,84 @@
 
         <!-- Receipt Preview -->
         <div style="padding:20px;background:#f8f8f8;overflow-y:auto;max-height:60vh">
-          <div class="receipt-preview">
-            <div class="receipt-header">
-              <div class="logos">
-                <div class="logo-circle" style="font-size:7px;font-weight:800;line-height:1.3;letter-spacing:0.5px">NAPOLCOM<br>PNP</div>
-                <div class="header-text">
-                  <h4>Republic of the Philippines</h4>
-                  <h4>NATIONAL POLICE COMMISSION</h4>
-                  <h4>PHILIPPINE NATIONAL POLICE</h4>
-                  <h3>BUTUAN CITY POLICE OFFICE</h3>
-                  <h2>BUTUAN CITY POLICE STATION 1</h2>
-                  <h5>Butuan City</h5>
-                </div>
-                <div class="logo-circle" style="font-size:7px;font-weight:800;line-height:1.3;letter-spacing:0.5px">BCPO<br>STATION 1</div>
+          <div class="receipt-preview modal-print-content" style="background:#fff;">
+            <div class="receipt-header" style="display:flex; justify-content:center; align-items:center; gap:0px; margin-bottom:24px; text-align:center;">
+              <div style="margin-bottom:30px; margin-right:-20px;">
+                <img src="/logo-pnp.png" style="width:80px; height:auto;" alt="PNP Logo" />
+              </div>
+              <div class="header-text" style="text-align:center; margin-top:50px;">
+                <div style="font-size:12pt; margin-bottom:2px;">Republic of the Philippines</div>
+                <div style="font-size:12pt; margin-bottom:2px;">NATIONAL POLICE COMMISSION</div>
+                <div style="font-size:12pt; margin-bottom:2px;">PHILIPPINE NATIONAL POLICE</div>
+                <div style="font-size:12pt; margin-bottom:2px;">BUTUAN CITY POLICE OFFICE</div>
+                <div style="font-size:12pt; font-weight:bold; margin-bottom:2px;">BUTUAN CITY POLICE STATION 1</div>
+                <div style="font-size:12pt;">Butuan City</div>
+              </div>
+              <div style="margin-bottom:20px; margin-left:-20px;">
+                <img src="/logo-bcpo.png" style="width:100px; height:auto;" alt="BCPO Logo" />
               </div>
             </div>
-            <div class="receipt-date">Date: <span>{{ fmtDate(selectedRecord.date) }}</span></div>
-            <div class="receipt-title">IMPOUNDING RECEIPT</div>
-            <div class="field-row"><span class="field-label">Type of Vehicle</span><span class="field-colon">:</span><span class="field-value">{{ selectedRecord.type }}</span></div>
-            <div class="field-row"><span class="field-label">Plate no.</span><span class="field-colon">:</span><span class="field-value">{{ selectedRecord.plate }}</span></div>
-            <div class="field-row"><span class="field-label">Color</span><span class="field-colon">:</span><span class="field-value">{{ selectedRecord.color }}</span></div>
-            <div class="field-row"><span class="field-label">Driver's Name</span><span class="field-colon">:</span><span class="field-value">{{ selectedRecord.driver }}</span></div>
-            <div class="field-row"><span class="field-label">Address</span><span class="field-colon">:</span><span class="field-value">{{ selectedRecord.driverAddress }}</span></div>
-            <div class="field-row"><span class="field-label">Registered Owner</span><span class="field-colon">:</span><span class="field-value">{{ selectedRecord.owner }}</span></div>
-            <div class="field-row"><span class="field-label">Address</span><span class="field-colon">:</span><span class="field-value">{{ selectedRecord.ownerAddress }}</span></div>
-            <div class="violations-section">
-              <strong>VIOLATIONS:</strong>
-              <div class="vio-row"><span class="vio-num">1.</span><span class="vio-line">{{ selectedRecord.vio1 }}</span></div>
-              <div class="vio-row"><span class="vio-num">2.</span><span class="vio-line">{{ selectedRecord.vio2 }}</span></div>
+            <div class="receipt-date" style="text-align:left;margin-top:5px;margin-bottom:0px;font-size:8pt;">Date: <span style="display:inline-block;min-width:180px;border-bottom:1px solid #000;margin-left:4px;">{{ selectedRecord.date ? fmtDate(selectedRecord.date) : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' }}</span></div>
+            <div class="receipt-title" style="font-family:'Book Antiqua', Palatino, serif; font-size:10pt; letter-spacing:3px; font-weight:bold; text-decoration:underline; text-align:center; margin-bottom:30px; margin-right:15px;">IMPOUNDING RECEIPT</div>
+            
+            <div class="field-row" style="margin-bottom:10px; font-size:9pt; font-weight:normal; display:flex; align-items:flex-end;">
+              <span class="field-label" style="width:130px; display:inline-block; font-weight:normal;">Type of Vehicle:</span>
+              <div class="field-value" style="display:inline-block; width:150px; border-bottom:1px solid #000; min-height:15px; font-weight:normal;">{{ selectedRecord.type }}</div>
             </div>
-            <div class="receipt-body">Subject MV/MC was apprehended by BCPO Station 1 personnel for violation/s as stated above on <u>&nbsp;{{ fmtDate(selectedRecord.date) }}&nbsp;</u> at about <u>&nbsp;{{ fmtTime(selectedRecord.time) }}&nbsp;</u> along the vicinity of <u>&nbsp;{{ selectedRecord.location }}&nbsp;</u> and same was brought for safekeeping subject for the investigation/verification and proper disposition.</div>
-            <div class="receipt-note">Note: Subject MV/MC shall only be released upon presentation of its pertinent original documents and agreement.</div>
-            <div class="receipt-sigs">
-              <div class="sig-title">Apprehending Officer:</div>
-              <div class="sig-group">
-                <div class="conformed">
-                  <div style="font-size:12.5px;margin-bottom:4px">Conformed:</div>
-                  <div class="sig-line-block" style="align-items:flex-start">
-                    <div style="width:200px;border-top:1px solid #000;padding-top:4px;font-size:12px;text-align:center;margin-top:40px">Owner/Driver/Possessor</div>
+            <div class="field-row" style="margin-bottom:10px; font-size:9pt; font-weight:normal; display:flex; align-items:flex-end;">
+              <span class="field-label" style="width:130px; display:inline-block; font-weight:normal;">Plate no.:</span>
+              <div class="field-value" style="display:inline-block; width:150px; border-bottom:1px solid #000; min-height:15px; font-weight:normal;">{{ selectedRecord.plate }}</div>
+            </div>
+            <div class="field-row" style="margin-bottom:10px; font-size:9pt; font-weight:normal; display:flex; align-items:flex-end;">
+              <span class="field-label" style="width:130px; display:inline-block; font-weight:normal;">Color:</span>
+              <div class="field-value" style="display:inline-block; width:150px; border-bottom:1px solid #000; min-height:15px; font-weight:normal;">{{ selectedRecord.color }}</div>
+            </div>
+            <div class="field-row" style="margin-bottom:10px; font-size:9pt; font-weight:normal; display:flex; align-items:flex-end;">
+              <span class="field-label" style="width:130px; display:inline-block; font-weight:normal;">Driver's Name:</span>
+              <div class="field-value" style="display:inline-block; width:150px; border-bottom:1px solid #000; min-height:15px; font-weight:normal;">{{ selectedRecord.driver }}</div>
+            </div>
+            <div class="field-row" style="margin-bottom:10px; font-size:9pt; font-weight:normal; display:flex; align-items:flex-end;">
+              <span class="field-label" style="width:130px; display:inline-block; font-weight:normal;">Address:</span>
+              <div class="field-value" style="display:inline-block; width:150px; border-bottom:1px solid #000; min-height:15px; font-weight:normal;">{{ selectedRecord.driverAddress }}</div>
+            </div>
+            <div class="field-row" style="margin-bottom:10px; font-size:9pt; font-weight:normal; display:flex; align-items:flex-end;">
+              <span class="field-label" style="width:130px; display:inline-block; font-weight:normal;">Registered Owner:</span>
+              <div class="field-value" style="display:inline-block; width:150px; border-bottom:1px solid #000; min-height:15px; font-weight:normal;">{{ selectedRecord.owner }}</div>
+            </div>
+            <div class="field-row" style="margin-bottom:10px; font-size:9pt; font-weight:normal; display:flex; align-items:flex-end;">
+              <span class="field-label" style="width:130px; display:inline-block; font-weight:normal;">Address:</span>
+              <div class="field-value" style="display:inline-block; width:150px; border-bottom:1px solid #000; min-height:15px; font-weight:normal;">{{ selectedRecord.ownerAddress }}</div>
+            </div>
+
+            <div class="violations-section" style="margin-top:20px; font-size:9pt; font-weight:normal;">
+              <strong style="font-size:9pt; font-weight:bold;">VIOLATIONS:</strong>
+              <div class="vio-row" style="margin-top:10px; display:flex; font-size:8pt; font-weight:normal; padding-left:95px;"><span class="vio-num" style="width:30px; font-weight:normal;">1.</span><span class="vio-line" style="flex:1; border-bottom:1px solid #000; min-height:18px; font-weight:normal;">{{ selectedRecord.vio1 }}</span></div>
+              <div class="vio-row" style="margin-top:10px; display:flex; font-size:8pt; font-weight:normal; padding-left:95px;"><span class="vio-num" style="width:30px; font-weight:normal;">2.</span><span class="vio-line" style="flex:1; border-bottom:1px solid #000; min-height:18px; font-weight:normal;">{{ selectedRecord.vio2 }}</span></div>
+              <div v-if="selectedRecord.extraVios" v-for="(ev, idx) in selectedRecord.extraVios.filter(x => x)" :key="idx" class="vio-row" style="margin-top:10px; display:flex; font-size:8pt; font-weight:normal; padding-left:95px;">
+                <span class="vio-num" style="width:30px; font-weight:normal;">{{ idx + 3 }}.</span><span class="vio-line" style="flex:1; border-bottom:1px solid #000; min-height:18px; font-weight:normal;">{{ ev }}</span>
+              </div>
+            </div>
+            <div class="receipt-body" style="text-indent:60px; font-size:9pt; line-height:1.8; margin-top:30px; margin-bottom:20px; text-align:justify;">Subject MV/MC was apprehended by BCPO Station 1 personnel for violation/s as stated above on <u>&nbsp;{{ selectedRecord.date ? fmtDate(selectedRecord.date) : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' }}&nbsp;</u> at about <u>&nbsp;{{ selectedRecord.time ? fmtTime(selectedRecord.time) : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' }}&nbsp;</u> along the vicinity of <u>&nbsp;{{ selectedRecord.location || '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' }}&nbsp;</u> and same was brought for safekeeping subject for the investigation/verification and proper disposition.</div>
+            <div class="receipt-note" style="margin-bottom:60px; font-size:9pt;">Note: Subject MV/MC shall only be released upon presentation of its pertinent original documents and agreement.</div>
+            <div class="receipt-sigs" style="position:relative; min-height:180px;">
+              <div class="apprehending" style="position:absolute; right:0; top:0; width:350px;">
+                <div style="font-size:10pt; margin-bottom:40px; text-align:left; ">Apprehending Officer:</div>
+                <div style="display:flex;flex-direction:column;gap:30px;align-items:flex-end;">
+                  <div class="sig-line-block" style="margin-top:0;align-items:center;">
+                    <div style="font-weight:bold;font-size:9pt;text-align:center;margin-bottom:2px">{{ selectedRecord.officer }}</div>
+                    <div style="width:260px;border-top:1px solid #000;"></div>
+                  </div>
+                  <div class="sig-line-block" v-if="selectedRecord.officer2" style="margin-top:0;align-items:center;">
+                    <div style="font-weight:bold;font-size:9pt;text-align:center;margin-bottom:2px">{{ selectedRecord.officer2 }}</div>
+                    <div style="width:260px;border-top:1px solid #000;"></div>
                   </div>
                 </div>
-                <div class="sig-line-block">
-                  <div style="font-weight:bold;font-size:13px;text-align:center;margin-top:40px;margin-bottom:4px">{{ selectedRecord.officer }}</div>
-                  <div style="border-top:1px solid #000;width:100%"></div>
-                  <div style="font-size:11px;text-align:center;color:#888;margin-top:3px">Apprehending Officer</div>
-                </div>
-                <div class="sig-line-block" v-if="selectedRecord.officer2">
-                  <div style="font-weight:bold;font-size:13px;text-align:center;margin-top:40px;margin-bottom:4px">{{ selectedRecord.officer2 }}</div>
-                  <div style="border-top:1px solid #000;width:100%"></div>
-                  <div style="font-size:11px;text-align:center;color:#888;margin-top:3px">Apprehending Officer</div>
+              </div>
+
+              <div class="conformed" style="position:absolute; left:0; top:160px; width:300px;">
+                <div style="font-size:9pt;margin-bottom:40px">Conformed:</div>
+                <div class="sig-line-block" style="align-items:center; margin-top:0; padding-left:40px;">
+                  <div style="width:220px;border-top:1px solid #000;padding-top:4px;font-size:9pt;text-align:center;">Owner/Driver/Possessor</div>
                 </div>
               </div>
             </div>
@@ -74,7 +103,7 @@
         <div class="no-print" style="padding:16px 24px;display:flex;gap:10px;flex-wrap:wrap;border-top:1px solid var(--border2)">
           <button class="btn btn-success" v-if="selectedRecord.status==='Impounded'" @click="releaseVehicle(selectedRecord)">✅ Release</button>
           <button class="btn btn-warning" v-if="selectedRecord.status==='Released'" @click="impoundVehicle(selectedRecord)">🚔 Impound</button>
-          <button class="btn btn-primary" @click="printRecordReceipt(selectedRecord)">
+          <button class="btn btn-primary" @click="doPrint">
             <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
             Print
           </button>
@@ -88,8 +117,14 @@
 </template>
 
 <script setup>
-import { inject } from 'vue'
 import { useImpoundStore, fmtDate, fmtTime } from '../composables/useImpoundStore.js'
 const { showModal, selectedRecord, releaseVehicle, impoundVehicle, editRecord, deleteRecord } = useImpoundStore()
-const printRecordReceipt = inject('printRecordReceipt')
+
+function doPrint() {
+  document.body.classList.add('print-modal-mode')
+  window.print()
+  setTimeout(() => {
+    document.body.classList.remove('print-modal-mode')
+  }, 100)
+}
 </script>
