@@ -82,7 +82,7 @@
                     <div style="font-weight:bold;font-size:9pt;text-align:center;margin-bottom:2px">{{ selectedRecord.officer }}</div>
                     <div style="width:260px;border-top:1px solid #000;"></div>
                   </div>
-                  <div class="sig-line-block" v-if="selectedRecord.officer2" style="margin-top:0;align-items:center;">
+                  <div class="sig-line-block" style="margin-top:0;align-items:center;">
                     <div style="font-weight:bold;font-size:9pt;text-align:center;margin-bottom:2px">{{ selectedRecord.officer2 }}</div>
                     <div style="width:260px;border-top:1px solid #000;"></div>
                   </div>
