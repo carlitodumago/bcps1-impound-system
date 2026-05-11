@@ -18,7 +18,7 @@
           <div class="receipt-preview modal-print-content" style="background:#fff;">
             <div class="receipt-header" style="display:flex; justify-content:center; align-items:center; gap:0px; margin-bottom:24px; text-align:center;">
               <div style="margin-bottom:30px; margin-right:-20px;">
-                <img src="/logo-pnp.jpg" style="width:80px; height:auto;" alt="PNP Logo" />
+                <img src="/logo-pnp.png" style="width:80px; height:auto;" alt="PNP Logo" />
               </div>
               <div class="header-text" style="text-align:center; margin-top:50px;">
                 <div style="font-size:12pt; margin-bottom:2px;">Republic of the Philippines</div>
