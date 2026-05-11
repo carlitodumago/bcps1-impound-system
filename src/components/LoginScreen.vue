@@ -4,7 +4,9 @@
     <div class="login-card">
       <div class="login-stars"></div>
       <div class="login-logo">
-        <div class="login-logo-badge">PNP</div>
+        <div class="login-logo-badge" style="background: transparent;">
+          <img src="/logo-pnp-icon.png" style="width: 100%; height: 100%; object-fit: contain;" />
+        </div>
         <div class="login-title">
           <strong>BCPS 1</strong>
           <span>Butuan City Police Station 1 — Impound System</span>

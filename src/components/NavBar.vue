@@ -2,7 +2,9 @@
   <nav class="no-print">
     <div class="nav-inner">
       <div class="nav-logo">
-        <div class="nav-logo-icon">PNP</div>
+        <div class="nav-logo-icon" style="background: transparent;">
+          <img src="/logo-pnp-icon.png" style="width: 100%; height: 100%; object-fit: contain;" />
+        </div>
         <div class="nav-logo-text">
           <strong>BCPS 1</strong>
           <span>Butuan City Police Station 1</span>
