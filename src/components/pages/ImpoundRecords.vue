@@ -25,7 +25,6 @@
             <td>
               <div style="display:flex;gap:6px;flex-wrap:wrap">
                 <button class="btn btn-primary btn-sm" @click="viewDetails(r)">View Details</button>
-                <button class="btn btn-info btn-sm" @click="viewRecord(r)">View Receipt</button>
                 <button class="btn btn-secondary btn-sm" @click="editRecord(r)">Edit</button>
                 <button class="btn btn-success btn-sm" v-if="r.status === 'Impounded'" @click="releaseVehicle(r)">Release</button>
                 <button class="btn btn-warning btn-sm" v-if="r.status === 'Released'" @click="impoundVehicle(r)">Impound</button>
@@ -45,7 +44,7 @@
 import { ref, computed } from 'vue'
 import { useImpoundStore, fmtDate } from '../../composables/useImpoundStore.js'
 
-const { page, records, downloadCSV, viewRecord, viewDetails, editRecord, deleteRecord, releaseVehicle, impoundVehicle } = useImpoundStore()
+const { page, records, downloadCSV, viewDetails, editRecord, deleteRecord, releaseVehicle, impoundVehicle } = useImpoundStore()
 
 const searchQ = ref(''); const filterStatus = ref(''); const filterType = ref('')
 

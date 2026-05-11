@@ -11,7 +11,7 @@
         You are about to {{ isRelease ? 'release' : 're-impound' }} vehicle<br>
         <strong style="color:var(--gold2);font-family:'Rajdhani',sans-serif;font-size:18px">{{ releaseTarget?.plate }}</strong>
       </p>
-      <p style="font-size:11px;color:rgba(136,146,164,0.7);margin-bottom:20px">Enter authorization password to proceed.</p>
+      <p style="font-size:11px;color:white;margin-bottom:20px">Enter authorization password (type "<u>bcps1</u>") to proceed.</p>
 
       <div v-if="error" style="background:rgba(192,57,43,0.15);border:1px solid rgba(192,57,43,0.4);border-radius:8px;padding:10px 14px;font-size:12px;color:#ef5350;margin-bottom:16px;display:flex;align-items:center;gap:8px">
         <span>⚠️</span><span>Incorrect password. Please try again.</span>
@@ -24,6 +24,7 @@
             :type="showPw ? 'text' : 'password'"
             v-model="password"
             placeholder="Enter password"
+            autocomplete="new-password"
             @keydown.enter="confirm"
             ref="pwInput"
             style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);border-radius:9px;padding:11px 40px 11px 14px;font-size:13px;color:var(--white);font-family:'Inter',sans-serif"

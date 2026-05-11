@@ -72,7 +72,6 @@
             <strong>Recent Records Table</strong>
             <p>Below the summary cards, a table displays the most recent impound records with quick-action buttons:</p>
             <ul>
-              <li><strong>View Receipt</strong> — Opens the formatted official impound receipt.</li>
               <li><strong>View Details</strong> — Shows full record information including vehicle photo.</li>
               <li><strong>Edit</strong> — Modify record details (requires authorization password).</li>
               <li><strong>Release / Impound</strong> — Change vehicle status (requires authorization password).</li>
@@ -153,7 +152,6 @@
             <p>Each record row has the following action buttons:</p>
             <ul>
               <li><strong>View Details</strong> — Opens a modal showing all record information, including vehicle photo (if uploaded), organized by section.</li>
-              <li><strong>View Receipt</strong> — Opens the official impounding receipt for viewing/printing.</li>
               <li><strong>Edit</strong> — Opens the edit form to modify record details. Requires the <strong>authorization password</strong> to save changes.</li>
               <li><strong>Release</strong> — Mark an impounded vehicle as released. Requires password confirmation.</li>
               <li><strong>Impound</strong> — Re-impound a previously released vehicle. Requires password confirmation.</li>
@@ -194,7 +192,7 @@
           <div class="manual-subsection">
             <strong>Editing a Record</strong>
             <ol>
-              <li>Click the <strong>Edit</strong> button on any record (from Dashboard, Impound Records, or View Receipt).</li>
+              <li>Click the <strong>Edit</strong> button on any record (from Dashboard or Impound Records).</li>
               <li>The Edit modal will open with all current record data pre-filled.</li>
               <li>Modify any fields as needed — vehicle info, driver/owner details, violations, officers, remarks, or vehicle photo.</li>
               <li>Enter the <strong>Authorization Password</strong> at the bottom of the form.</li>

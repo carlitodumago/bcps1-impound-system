@@ -51,7 +51,6 @@
               <td>
                 <div style="display:flex;gap:6px;flex-wrap:wrap">
                   <button class="btn btn-primary btn-sm" @click="viewDetails(r)">View Details</button>
-                  <button class="btn btn-info btn-sm" @click="viewRecord(r)">View Receipt</button>
                   <button class="btn btn-secondary btn-sm" @click="editRecord(r)">Edit</button>
                   <button class="btn btn-success btn-sm" v-if="r.status === 'Impounded'" @click="releaseVehicle(r)">Release</button>
                   <button class="btn btn-warning btn-sm" v-if="r.status === 'Released'" @click="impoundVehicle(r)">Impound</button>
@@ -74,7 +73,7 @@ import { useImpoundStore, fmtDate } from '../../composables/useImpoundStore.js'
 
 Chart.register(...registerables)
 
-const { page, records, totalImpounded, totalReleased, activeImpounded, todayCount, todayDate, viewRecord, viewDetails, releaseVehicle, impoundVehicle, editRecord, deleteRecord } = useImpoundStore()
+const { page, records, totalImpounded, totalReleased, activeImpounded, todayCount, todayDate, viewDetails, releaseVehicle, impoundVehicle, editRecord, deleteRecord } = useImpoundStore()
 
 const monthlyChart = ref(null)
 const typeChart    = ref(null)
