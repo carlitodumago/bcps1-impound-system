@@ -5,7 +5,7 @@
         <div class="nav-logo-icon">PNP</div>
         <div class="nav-logo-text">
           <strong>BCPS 1</strong>
-          <span>Butuan City Police Office</span>
+          <span>Butuan City Police Station 1</span>
         </div>
       </div>
       <div class="nav-links">
