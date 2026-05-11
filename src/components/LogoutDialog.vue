@@ -3,7 +3,7 @@
     <div class="modal" style="max-width:400px;padding:32px 28px;text-align:center">
       <div style="width:64px;height:64px;border-radius:50%;background:rgba(192,57,43,0.12);border:2px solid rgba(192,57,43,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px">🔓</div>
       <h2 style="font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;color:var(--white);margin-bottom:8px">Confirm Logout</h2>
-      <p style="font-size:13px;color:var(--gray);line-height:1.6;margin-bottom:8px">Are you sure you want to log out of the<br><strong style="color:var(--gold2)">BCPO Station 1 Impound System</strong>?</p>
+      <p style="font-size:13px;color:var(--gray);line-height:1.6;margin-bottom:8px">Are you sure you want to log out of the<br><strong style="color:var(--gold2)">BCPS 1 Impound System</strong>?</p>
       <p style="font-size:11px;color:rgba(136,146,164,0.7);margin-bottom:28px">Your session will be ended and you will be returned to the login page.</p>
       <div style="display:flex;gap:12px;justify-content:center">
         <button class="btn btn-secondary" style="flex:1;justify-content:center;padding:11px 20px" @click="showLogoutDialog = false">
