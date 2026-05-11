@@ -6,8 +6,8 @@
       <div class="login-logo">
         <div class="login-logo-badge">PNP</div>
         <div class="login-title">
-          <strong>BCPO STATION 1</strong>
-          <span>Butuan City Police Office — Impound System</span>
+          <strong>BCPS 1</strong>
+          <span>Butuan City Police Station 1 — Impound System</span>
         </div>
       </div>
       <div class="login-divider"></div>

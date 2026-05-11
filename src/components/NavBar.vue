@@ -4,7 +4,7 @@
       <div class="nav-logo">
         <div class="nav-logo-icon">PNP</div>
         <div class="nav-logo-text">
-          <strong>BCPO STATION 1</strong>
+          <strong>BCPS 1</strong>
           <span>Butuan City Police Office</span>
         </div>
       </div>
