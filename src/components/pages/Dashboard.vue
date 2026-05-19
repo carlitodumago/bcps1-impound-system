@@ -63,6 +63,10 @@
         </table>
       </div>
     </div>
+
+    <div style="margin-top:20px" class="card">
+      <PNPStationsMap />
+    </div>
   </div>
 </template>
 
@@ -70,6 +74,7 @@
 import { ref, computed, watch, onMounted, nextTick } from 'vue'
 import { Chart, registerables } from 'chart.js'
 import { useImpoundStore, fmtDate } from '../../composables/useImpoundStore.js'
+import PNPStationsMap from '../PNPStationsMap.vue'
 
 Chart.register(...registerables)
 
